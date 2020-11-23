@@ -13,9 +13,6 @@ const { response } = require('express')
 
 var activeSessions = []
 
-var fakeSalt = "abcdefg"
-var fakeDb = {UID: 1, username: "ad570f8effe6d70affe87bae3d06a723b1298782e2e8fbb124927dabfcf3703d", password: "5dbc389d96277a6d1ffe304c84f4961b95f198686a644d90ded7d04b0e6220d7", salt: fakeSalt}
-
 function getSalt() {
     return Crypto.randomBytes(saltSize).toString('hex');
 }
@@ -26,6 +23,7 @@ function SHA256(data) {
 }
 
 function addUser(req, res) {
+
     const {username, password} = req.query
     if (!username || !password) {
         res.status(404).send("ERROR INVALID PARAMS")
@@ -45,6 +43,10 @@ function addUser(req, res) {
 }
 
 function login(req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader('Access-Control-Allow-Methods', 'http://localhost:3000');
+    res.setHeader("Access-Control-Allow-Headers", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     const {username, password} = req.query
     
     if (!username || !password) {
@@ -81,7 +83,7 @@ function login(req, res) {
                 }
 
                 res.cookie('sessionCookie', {uid: UID, token: tokenVal});
-                res.status(200).send("Logged In")
+                res.status(200).send("Okay")
             } else {
                 res.status(401).send("Invalid credentials")
                 return
@@ -91,6 +93,10 @@ function login(req, res) {
 }
 
 function logout(req, res) {
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader('Access-Control-Allow-Methods', 'http://localhost:3000');
+    res.setHeader("Access-Control-Allow-Headers", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     if (isValidSession(req, undefined)) {
         if (req.cookies === undefined || req.cookies.sessionCookie === undefined) {
             res.status(401).send("No cookie")
@@ -111,7 +117,6 @@ function logout(req, res) {
 }
 
 function isValidSession(req, res) {
-
     if (res !== undefined && (req.cookies === undefined || req.cookies.sessionCookie === undefined)) {
         res.status(404).send("No cookie")
         return

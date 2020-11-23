@@ -1,0 +1,40 @@
+version: '2.1'
+
+services:
+  db:
+    image: postgres
+    healthcheck:
+      test: exit 0
+    environment:
+      - POSTGRES_DB=userInfo
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    volumes:
+        - ./backend/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+  backend:
+    build: ./backend/
+    image: agadient2018/ajgrepo:project1_authentication_service_backend
+    healthcheck:
+      test: exit 0
+    command: npm start
+    environment:
+      - DATABASE_URL=postgres://admin:admin@db:5432
+      - NODE_ENV=test
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    ports:
+      - 3001:3001
+      
+  frontend:
+    build: ./frontend/
+    image: agadient2018/ajgrepo:project1_authentication_service_frontend
+    command: npm start
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - 3000:3000
