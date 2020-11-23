@@ -4,7 +4,7 @@
 In the root of the project directory, run thw following commands 
 
 ```
-npm install.
+npm install
 docker-compose up --build
 ```
 
