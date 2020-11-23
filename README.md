@@ -1,8 +1,12 @@
 # authentication_service
 
 # Installation
-In the root of the project directory, run npm install.
-To start services, run "docker-compose up --build" from the root of the project directory
+In the root of the project directory, run thw following commands 
+
+```
+npm install.
+docker-compose up --build
+```
 
 # API
 
