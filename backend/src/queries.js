@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-user: 'admin',
-host: 'db',
+user: 'ausitngadient',
+host: 'localhost',
 database: 'userInfo',
-password: 'admin',
+password: '',
 port: 5432,
 })
 const saltSize = 16
@@ -24,7 +24,7 @@ function SHA256(data) {
 
 function addUser(req, res) {
 
-    const {username, password} = req.query
+    const {username, password} = req.body
     if (!username || !password) {
         res.status(404).send("ERROR INVALID PARAMS")
         return
