@@ -44,8 +44,8 @@ function addUser(req, res) {
 
 function login(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader('Access-Control-Allow-Methods', 'http://localhost:3000');
-    res.setHeader("Access-Control-Allow-Headers", "http://localhost:3000");
+    res.setHeader('Access-Control-Allow-Methods', "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     const {username, password} = req.query
     
@@ -94,8 +94,8 @@ function login(req, res) {
 
 function logout(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader('Access-Control-Allow-Methods', 'http://localhost:3000');
-    res.setHeader("Access-Control-Allow-Headers", "http://localhost:3000");
+    res.setHeader('Access-Control-Allow-Methods', "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     if (isValidSession(req, undefined)) {
         if (req.cookies === undefined || req.cookies.sessionCookie === undefined) {
