@@ -15,8 +15,10 @@ class App extends React.Component {
     username = escape(username)
     let password = this.state.password
     password = escape(password)
-    let url = `http://localhost:3001/login?username=${username}&password=${password}`
-    await fetch(url, {method: 'GET', credentials: 'include'})
+    let url = `http://localhost:3001/login`
+    await fetch(url, {method: 'POST',  body: encodeURI(`username=${username}&password=${password}`), headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }, credentials: 'include'})
 
   }
   

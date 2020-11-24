@@ -47,8 +47,7 @@ function login(req, res) {
     res.setHeader('Access-Control-Allow-Methods', "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    const {username, password} = req.query
-    
+    let {username, password} = req.body
     if (!username || !password) {
         res.status(404).send("Username or Password Invalid!")
         return
@@ -93,7 +92,7 @@ function login(req, res) {
 }
 
 function logout(req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"]);
     res.setHeader('Access-Control-Allow-Methods', "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Credentials", "true");

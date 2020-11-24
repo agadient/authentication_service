@@ -14,7 +14,7 @@ docker-compose up --build
 
 ### Expected Request: 
 
-{username, password} inside of req.query.
+{username, password} inside of req.body. Must be urlencoded. No json!
 
 ### Response: 
 
