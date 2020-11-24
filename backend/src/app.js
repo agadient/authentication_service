@@ -14,12 +14,6 @@ app.use(
 
 
 app.use(cookieParser())
-app.options('/login', function (req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader('Access-Control-Allow-Methods', 'http://localhost:3000');
-    res.setHeader("Access-Control-Allow-Headers", "http://localhost:3000");
-    res.end();
-  });
 app.get('/addUser', (req, res) => db.addUser(req, res))
 app.get('/login', (req, res) => db.login(req, res))
 app.get('/logout', (req, res) => db.logout(req, res))
