@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool
 const pool = new Pool({
-user: 'ausitngadient',
-host: 'localhost',
+user: 'admin',
+host: 'db',
 database: 'userInfo',
-password: '',
+password: 'admin',
 port: 5432,
 })
 const saltSize = 16
